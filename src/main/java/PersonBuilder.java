@@ -3,7 +3,7 @@ import java.util.OptionalInt;
 public class PersonBuilder {
     private String name;
     private String surname;
-    private int age;
+    private OptionalInt age;
     private String address;
 
     public PersonBuilder setName(String name) {
@@ -18,7 +18,7 @@ public class PersonBuilder {
         if (age < 0) {
             throw new IllegalArgumentException("Некорректный возраст");
         } else {
-            this.age = age;
+            this.age = OptionalInt.of(age);
             return this;
         }
     }
@@ -32,8 +32,8 @@ public class PersonBuilder {
             throw new IllegalStateException("Не хватает обязательных полей");
         }
         Person person;
-        if (age != -1) {
-            person = new Person(name, surname, age);
+        if (age.isPresent()) {
+            person = new Person(name, surname, age.getAsInt());
         } else {
             person = new Person(name, surname);
         }

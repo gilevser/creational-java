@@ -3,7 +3,7 @@ import java.util.OptionalInt;
 public class Person {
     protected final String name;
     protected final String surname;
-    private int age ;
+    private OptionalInt age ;
     protected String address;
 
     public Person(String name, String surname) {
@@ -17,12 +17,12 @@ public class Person {
         if (age < 0) {
             throw new IllegalArgumentException("Некорректный возраст");
         } else {
-            this.age = age;
+            this.age = OptionalInt.of(age);
         }
     }
 
     public boolean hasAge() {
-        return age >= 0;
+        return age.isPresent();
     }
     public boolean hasAddress() {
         return address != null;
@@ -34,7 +34,7 @@ public class Person {
     public String getSurname() {
         return surname;
     }
-    public int getAge() {
+    public OptionalInt getAge() {
         return age;
     }
     public String getAddress() {
@@ -46,7 +46,7 @@ public class Person {
     }
     public void happyBirthday() {
         if (hasAge()) {
-            age++;
+            age = OptionalInt.of(age.getAsInt() + 1);
         }
     }
 
