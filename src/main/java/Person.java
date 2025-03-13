@@ -3,7 +3,7 @@ import java.util.OptionalInt;
 public class Person {
     protected final String name;
     protected final String surname;
-    private OptionalInt age ;
+    private OptionalInt age = OptionalInt.empty();
     protected String address;
 
     public Person(String name, String surname) {
@@ -61,7 +61,7 @@ public class Person {
     public String toString() {
         return "Имя: " + this.name + "\n" +
                 "Фамилия: " + this.surname + "\n" +
-                "Возраст: " + this.age + "\n" +
+                "Возраст: " + (hasAge() ? age.getAsInt() : "0") + "\n" +
                 "Адрес: " + this.address + "\n";
     }
 
